@@ -1,124 +1,67 @@
-//import SpotifyWebApi from 'spotify-web-api-js';
+import React from 'react';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, InputGroup, FormControl, Button, Row, Card } from 'react-bootstrap';
-import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 
-const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
-const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
+// 가수 검색 페이지 컴포넌트
+import ArtistSearchPage from './components/ArtistSearchPage';
 
-function App () {
+// 앨범 상세 페이지 컴포넌트
+import AlbumDetailPage from './components/AlbumDetailPage';
 
-  const [searchInput, setSerchInput] = useState("");
-  const [accessToken, setAccessToken] = useState("");
-  const [albums, setAlbums] = useState([]);
-
-  useEffect( () => {
-    // API Access Token
-    const authParameters = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: 'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET
-    }
-    fetch('https://accounts.spotify.com/api/token', authParameters)
-      .then(result => result.json())
-      .then(data => setAccessToken(data.access_token))
-  }, [])
+// 스포티파이 메인 화면
+import Spotify from './components/Spotify';
 
 
-  // Search
-  // Search 함수가 비동기인 점 : 함수 내부에 다양한 fetch 문이 있고, 차례를 기다려야 하기 때문
-  async function search() {
-    console.log("Search for " + searchInput);  // Taylor Swift
-
-    const searchParameters = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + accessToken
-      }
-    }
-
-    // 요청에 변수를 추가하기 위해 '?'를 사용
-    const artistID = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist', searchParameters)
-      .then(response => response.json())
-
-      // 아티스트의 모든 앨범을 가져오기 위한 쿼리를 만드려면 아티스트의 아이디가 필요
-      .then(data => { return data.artists.items[0].id })
-    
-    console.log("Artist ID is " + artistID);
-    // Get request with Arist ID grab all the albums from that artist
-    const albums = await fetch('https://api.spotify.com/v1/artists/' + artistID + '/albums' + '?include_groups=album&market=US&limit=50', searchParameters)
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      setAlbums(data.items)
-    });
-
-    // Display those albums to the user
-
-  }
-
-  console.log(albums);
-
+function ArtistSearchButton() {
   return (
-    <div className='App'>
+    <div>
 
-      <div>
-        <br></br>
-        <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Spotify_logo_with_text.svg/1024px-Spotify_logo_with_text.svg.png' />
-        <br></br><br></br><br></br>
+        <div className='mainLoge'>
+          <br></br>
+          <img src='https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png' />
+          <br></br><br></br><br></br>
+        </div>
+
+
+      <div className='artistSearch'>
+        {/* 가수 검색 페이지로 이동할 링크 */}
+        <Link to="/artist-search">가수 검색</Link>
       </div>
+      
+      <br></br>
 
-      <Container>
-        <InputGroup className='mb-3' size='1g'>
-          <FormControl
-            placeholder="Search For Artist"
-            type="input"
-            onKeyPress={event => {
-              if (event.key == "Enter") {
-                search();
-              }
-            }}
-            onChange={event => setSerchInput(event.target.value)}  
-          />
-          <Button onClick={search}>
-            Search
-          </Button>
-        </InputGroup>
-      </Container>
+      <div className='spotifySearch'>
+        {/* 가수 검색 페이지로 이동할 링크 */}
+        <Link to="/spotify-main">스포티파이</Link>
+      </div>
+      
 
-      <br></br><br></br>
-
-      <Container>
-        <Row className='mx-2 row row-cols-4'>
-          {albums.map( (album, i) => {
-
-            console.log(album);
-            
-            return (
-              <div onClick={ () => console.log("Click!") }>
-                <Card>
-                <Card.Img src={album.images[0].url} />
-                <Card.Body>
-                  <Card.Title>{album.name}</Card.Title>
-                </Card.Body>
-              </Card>
-              </div>
-              
-            )
-          
-          })}
-
-          
-
-        </Row>
-      </Container>
-    
     </div>
   );
-};
+}
+
+function App() {
+
+  return (
+
+    <Router>
+      <Routes>
+        {/* ArtistSearchPage 컴포넌트와 연결된 라우트 */}
+        <Route path="/artist-search" element={<ArtistSearchPage />} />
+
+        {/* AlbumDetailPage 컴포넌트와 연결된 라우트 */}
+        <Route path="/album-detail/:albumId" element={<AlbumDetailPage />} /> {/* AlbumDetailPage 라우트 추가 */}
+
+        {/* 가수 검색 버튼이 있는 페이지도 라우트로 처리 */}
+        <Route path="/" element={<ArtistSearchButton />} />
+
+        {/* Spotify 컴포넌트와 연결된 라우트 */}
+        <Route path="/spotify-main" element={<Spotify />} />
+      </Routes>
+    </Router>
+    
+  );
+}
+
 
 export default App;
