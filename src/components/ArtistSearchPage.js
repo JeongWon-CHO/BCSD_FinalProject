@@ -11,7 +11,9 @@ function ArtistSearchPage() {
     const [accessToken, setAccessToken] = useState("");
     const [albums, setAlbums] = useState([]);
     const [artistID, setArtistID] = useState(""); // 로컬 스토리지에 저장하기 위한 useState
-
+    
+    // 변경된 상태 추가: 앨범 정보
+    const [albumInfo, setAlbumInfo] = useState([]);
 
 
     useEffect(() => {
@@ -34,69 +36,99 @@ function ArtistSearchPage() {
     // Search 함수가 비동기인 점 : 함수 내부에 다양한 fetch 문이 있고, 차례를 기다려야 하기 때문
     async function search() {
         console.log("Search for " + searchInput);
-
+    
         const searchParameters = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + accessToken
             }
-    }
-
-
-
-    // 요청에 변수를 추가하기 위해 '?'를 사용
-    const artistIDResponse = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist', searchParameters)
-            .then(response => response.json())
-            .then(data => { return data.artists.items[0].id });
-
-    console.log("Artist ID is " + artistIDResponse);
-    localStorage.setItem('artistName', artistIDResponse);
-    setArtistID(artistIDResponse);
-
-
-    const artistName = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist', searchParameters)
-            .then(response => response.json())
-            .then(data => { return data.artists.items[0].name });
-
-
-    console.log("Artist Name is " + artistName);
-    localStorage.setItem('artistName', artistName);
-
-
-    const albumName = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist', searchParameters)
-            .then(response => response.json())
-            .then(data => { return data.artists.name });
-
-    console.log("Album Name is " + albumName);
-    localStorage.setItem('albumName', albumName);
+        };
     
-
-
-    // Get request with Arist ID grab all the albums from that artist
-    const albumsResponse = await fetch('https://api.spotify.com/v1/artists/' + artistIDResponse + '/albums' + '?include_groups=album&market=US&limit=50', searchParameters)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            setAlbums(data.items);
-    });
-
-    // Save artistID and albums to local storage
-    localStorage.setItem('artistID', artistIDResponse);
-    localStorage.setItem('albums', JSON.stringify(albumsResponse));
-
+        try {
+            const searchResponse = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist', searchParameters);
+            const searchData = await searchResponse.json();
+            console.log("Search data:", searchData);
+    
+            const artistIDResponse = searchData.artists.items[0].id;
+            setArtistID(artistIDResponse);
+    
+            const artistName = searchData.artists.items[0].name;
+            localStorage.setItem('artistName', artistName);
+    
+            const artistFollowers = searchData.artists.items[0].followers.total;
+            localStorage.setItem('artistFollowers', artistFollowers);
+            setArtistID(artistFollowers);
+    
+            const artistGenres = searchData.artists.items[0].genres;
+            localStorage.setItem('artistGenres', JSON.stringify(artistGenres));
+            setArtistID(artistGenres);
+    
+    
+            const albumsResponse = await fetch('https://api.spotify.com/v1/artists/' + artistIDResponse + '/albums' + '?include_groups=album&market=US&limit=50', searchParameters);
+            const albumsData = await albumsResponse.json();
+    
+            setAlbums(albumsData.items);
+            localStorage.setItem('albums', JSON.stringify(albumsData));
+    
+            // 앨범 정보 초기화
+            const newAlbumInfo = [];
+    
+            if (Array.isArray(albumsData.items)) {
+                for (const albumData of albumsData.items) {
+                    const albumID = albumData.id;
+                    const albumName = albumData.name;
+                    const albumImageURL = albumData.images[0].url;
+                    const albumReleaseDate = albumData.release_date;
+                    const albumTracksResponse = await fetch(`https://api.spotify.com/v1/albums/${albumID}/tracks`, searchParameters);
+                    const albumTracksData = await albumTracksResponse.json();
+                    const albumTracks = albumTracksData.items.map(track => track.name);
+    
+                    newAlbumInfo.push({
+                        id: albumID,
+                        name: albumName,
+                        imageURL: albumImageURL,
+                        releaseDate: albumReleaseDate,
+                        tracks: albumTracks
+                    });
+                }
+            }
+    
+            setAlbumInfo(newAlbumInfo);
+    
+            // 로컬스토리지에 올리기
+            newAlbumInfo.forEach((album, index) => {
+                localStorage.setItem(`albumInfo_${album.id}`, JSON.stringify(album));
+            });
+    
+        } catch (error) {
+            console.error("Error:", error);
+        }
     }
 
+    useEffect(() => {
+        console.log(albumInfo); // albumInfo가 업데이트될 때마다 출력
+    }, [albumInfo]); // albumInfo가 변경될 때마다 useEffect 실행
 
-    console.log(albums);
+    // AlbumInfo가 변경될 때마다 로컬 스토리지에 저장
+    useEffect(() => {
+        albumInfo.forEach((album, index) => {
+            localStorage.setItem(`albumInfo_${index}`, JSON.stringify(album));
+        });
+    }, [albumInfo]); // albumInfo가 변경될 때마다 useEffect 실행
 
 
-    const albumNameArr = [];
-    const albumNameNumArr = [];
+    //console.log(albums);
 
     return (
 
     <div>
+
+
+
+        <div className='mainLoge2'>
+            <img src='https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png' className='centerImageLogo'/>
+        </div>
 
         <Container>
             <InputGroup className='mb-3' size='1g'>
@@ -122,38 +154,22 @@ function ArtistSearchPage() {
         <br></br><br></br>
 
         <Container>
-            <Row className='mx-2 row row-cols-4'>
-
-                {albums.map((album, i) => {
-
-                console.log(album);
-                albumNameArr.push(album.name)
-                albumNameNumArr.push(i)
-
-                // 개비효율적인데 ...
-                localStorage.setItem('albumName', albumNameArr);
-                localStorage.setItem('albumNameNum', albumNameNumArr);
-
-                return (
-                    <div onClick={ () => console.log("Click!") }>
-
-                        <Link to={`/album-detail/${album.id}`}>
-                            
-                            <Card>
-                                <Card.Img src={album.images[0].url} />
-                                <Card.Body>
-                                    <Card.Title>{album.name}</Card.Title>
-                                </Card.Body>
-                                <br></br>
-                            </Card>
-                        </Link>
-                    </div>
-                    
-                    )
-                })}
-
-            </Row>
-        </Container>
+                <Row className='mx-2 row row-cols-4'>
+                    {albumInfo.map((album, i) => (
+                        <div onClick={() => console.log("Click!")}>
+                            <Link to={`/album-detail/${album.id}`}>
+                                <Card>
+                                    <Card.Title>
+                                        <div className='albumName'>
+                                            {album.name}
+                                        </div>
+                                        </Card.Title>
+                                </Card>
+                            </Link>
+                        </div>
+                    ))}
+                </Row>
+            </Container>
     </div>
     );
 }

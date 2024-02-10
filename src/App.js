@@ -11,31 +11,49 @@ import AlbumDetailPage from './components/AlbumDetailPage';
 // 스포티파이 메인 화면
 import Spotify from './components/Spotify';
 
+import SpotifyKeywordPage from './components/SpotifyKeywordPage';
+
 
 function ArtistSearchButton() {
   return (
     <div>
-
+        <br></br>
         <div className='mainLoge'>
           <br></br>
-          <img src='https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png' />
+          <img src='https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png' className='centerImage'/>
           <br></br><br></br><br></br>
         </div>
 
 
-      <div className='artistSearch'>
-        {/* 가수 검색 페이지로 이동할 링크 */}
-        <Link to="/artist-search">가수 검색</Link>
-      </div>
+        <div className='artistSearchWrapper'>
+          <div className='artistSearch'>
+            <Link to="/artist-search">가수 검색</Link>
+          </div>
+        </div>
       
       <br></br>
+      <br></br>
 
-      <div className='spotifySearch'>
-        {/* 가수 검색 페이지로 이동할 링크 */}
-        <Link to="/spotify-main">스포티파이</Link>
-      </div>
-      
+        <div className='spotifySearchWrapper'>
+          <div className='spotifySearch'>
+            <Link to="/spotify-main">스포티파이</Link>
+          </div>
+        </div>
 
+      <br></br>
+      <br></br>
+
+        <div className='spotifyKeywordWrapper'>
+          <div className='spotifyKeyword'>
+            <Link to="/spotify-keyword">키워드 검색</Link>
+          </div>
+        </div>
+
+        <div className="extraSpace"></div>
+
+        <div className='footer'>
+          @2023-2 BCSD FrontEnd Beginner Final Project
+        </div>
     </div>
   );
 }
@@ -57,6 +75,9 @@ function App() {
 
         {/* Spotify 컴포넌트와 연결된 라우트 */}
         <Route path="/spotify-main" element={<Spotify />} />
+
+        {/* 키워드 검색 컴포넌트와 연결된 라우트 */}
+        <Route path="/spotify-keyword" element={<SpotifyKeywordPage />} />
       </Routes>
     </Router>
     

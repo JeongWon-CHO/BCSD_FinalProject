@@ -1,26 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 function AlbumDetailPage() {
+    const { albumId } = useParams();
+    const [albumInfo, setAlbumInfo] = useState(null);
 
-    // 이전 페이지에서 전달된 데이터 읽어오기
-    const artistName = localStorage.getItem('artistName');
-    
-    const albumName = localStorage.getItem('albumNameNum');
+    useEffect(() => {
+        // 로컬 스토리지에서 앨범 정보를 가져옴
+        const albumInfoString = localStorage.getItem(`albumInfo_${albumId}`);
+        if (albumInfoString) {
+            const albumInfo = JSON.parse(albumInfoString);
+            setAlbumInfo(albumInfo);
+        }
+    }, [albumId]);
 
-    // 앨범 정보가 있으면 앨범 세부 정보 표시
+    if (!albumInfo) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div>
-            <div className='artistName'>
-                가수 이름 : {artistName}
-            </div>
-
-            <div className='albumName'>
-                앨범 이름 : {albumName}
-            </div>
-
-            <div>
-                왜 안될까 진차 ..
-            </div>
+            {/* 앨범 정보를 표시하는 UI 코드 */}
+            <h1>{albumInfo.name}</h1>
+            <img src={albumInfo.imageURL} alt={albumInfo.name} />
+            <p>Release Date: {albumInfo.releaseDate}</p>
+            <h2>Tracks</h2>
+            <ul>
+                {albumInfo.tracks.map((track, index) => (
+                    <li key={index}>{track}</li>
+                ))}
+            </ul>
         </div>
     );
 }

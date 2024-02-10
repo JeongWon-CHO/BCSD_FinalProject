@@ -1,28 +1,78 @@
+/*App.js*/
+
+.artistSearchWrapper {
+  display: flex; /* Flexbox를 사용하여 내부 요소들을 정렬 */
+  justify-content: center; /* 수평 가운데 정렬 */
+}
+
 .artistSearch {
-  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 68px;
+  padding-right: 68px;
+
   font-size: 50px;
+
+  border: 4px solid rgb(30, 215, 96);
+  border-radius: 30px;
+
+  color: aliceblue;
+  text-decoration-line: none; /* 밑줄 제거 */
+}
+
+.spotifySearchWrapper {
+  display: flex; /* Flexbox를 사용하여 내부 요소들을 정렬 */
+  justify-content: center; /* 수평 가운데 정렬 */
 }
 
 .spotifySearch {
-  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+
   font-size: 50px;
+
+  border: 4px solid rgb(30, 215, 96);
+  border-radius: 30px;
+
+  color: aliceblue;
+  text-decoration: none; 
 }
 
-.musicSearch {
-  text-align: center;
-  font-size: 50px;
+
+.spotifyKeywordWrapper {
+  display: flex; /* Flexbox를 사용하여 내부 요소들을 정렬 */
+  justify-content: center; /* 수평 가운데 정렬 */
 }
 
+.spotifyKeyword {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+
+  font-size: 50px;
+
+  border: 4px solid rgb(30, 215, 96);
+  border-radius: 30px;
+
+  color: aliceblue;
+  text-decoration: none; /* 밑줄 제거 */
+
+}
 
 .mainLogo {
-  text-align: center; /* 이미지를 가운데 정렬합니다. */
+  display: flex;
+  justify-content: center;
 }
 
-.mainLoge img {
-  width: 200px; /* 원하는 너비로 조절 */
+.centerImage {
+  /* 이미지의 가운데 정렬 */
+  display: block;
+  margin: 0 auto;
+  width: 300px; /* 원하는 너비로 조절 */
   height: auto;
-  display: inline-block;
-  margin-left: 44.1%;
 }
 
 
@@ -31,6 +81,21 @@ body {
 }
 
 
+.extraSpace {
+  height: 220px; /* 여유 공간 */
+}
+
+.footer {
+  color: rgba(225, 225, 225, 0.495);
+  text-align: center; /* 가운데 정렬 */
+  padding: 10px 0; /* 위아래 여백 추가 */
+  font-size: 12px;
+}
+
+
+
+/*ArtistSearchPage.js*/
+
 .mb-3 {
     display: flex;
     justify-content: center;
@@ -38,13 +103,13 @@ body {
     margin-top: 3%;
 }
 
-
 .searchInput {
   width: 560px;
   height: 40px;
   font-size: 20px;
   border-radius: 30px;
   padding-left: 50px;
+  border: 3px solid rgb(20, 169, 73);
 }
 
 .searchInputBtn {
@@ -65,15 +130,11 @@ body {
 }
 
 
-
-
-/* 앨범 상세 페이지 */
-
-.artistName {
-  margin-left: 10%;
-  margin-top: 5%;
-  font-size: 20px;
-  color: white;
+.centerImageLogo {
+  padding-left: 10px;
+  padding-top: 10px;
+  width: 120px;
+  height: auto;
 }
 
 .albumName {
@@ -81,11 +142,30 @@ body {
   margin-top: 5%;
   font-size: 20px;
   color: white;
+  text-decoration-line: none;
+
+  border: 3px solid rgb(20, 169, 73);
+  border-radius: 30px;
+
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  margin-right: 17.5%;
+
+  box-shadow: 2px 2px 8px rgba(184, 255, 187, 0.3);
 }
 
 
 
+/* AlbumDetailPage.js */
 
+
+
+
+
+
+/* 기존 */
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
