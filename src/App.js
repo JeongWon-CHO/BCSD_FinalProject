@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import StartingPage from './components/StartingPage';
 import './App.css';
 import './css/MusicSearchPage.css'
+import './css/MyPage.css'
+import './css/RecommendPage.css'
 
 function App() {
   const [username, setUsername] = useState('');

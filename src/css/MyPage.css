@@ -1,0 +1,135 @@
+/* My Page */
+
+.myFavorAlbums {
+    text-align: center;
+    color: rgb(81, 199, 122);
+    font-size: 70px;
+    margin-top: 1%;
+    margin-bottom: 5%;
+}
+
+.myFavor-myPage {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 10%;
+    border: dotted 8px;
+    border-color: rgb(210, 255, 217);
+}
+
+.myFavorMusic-myPage {
+    margin-left: 22%;
+    margin-right: 22%;
+    margin-bottom: 4%;
+    margin-top: 4%;
+    border: 10px solid rgba(255, 255, 255, 0.096);
+    border-radius: 20px;
+}
+
+.albumName-myPage {
+    text-align: center;
+    color: rgb(81, 199, 122);
+
+    font-size: 15px;
+}  
+.albumImgDiv-myPage {
+    display: flex; /* Flexbox를 사용하여 내부 요소들을 정렬 */
+    justify-content: center; /* 수평 가운데 정렬 */
+}
+
+.albumImg-myPage {
+    width: 300px;
+    height: auto;
+
+    margin: 5% 2% 1% 2%;
+}
+
+.albumRelease-myPage {
+    text-align: center;
+    color: rgb(204, 204, 204);
+}
+
+.trackList-myPage {
+    color: white;
+    text-align: center;
+    list-style-type: none;
+}
+
+.textCenter-myPage {
+    display: flex; /* Flexbox를 사용하여 내부 요소들을 정렬 */
+    flex-direction: column; /* 요소들을 수직 방향으로 정렬 */
+    justify-content: center; /* 수직 가운데 정렬 */
+    align-items: center; /* 수평 가운데 정렬 */
+    height: 100vh; /* 부모 컨테이너의 높이를 전체 화면 높이로 설정 */
+}
+
+.tung {
+    color: rgba(255, 255, 255, 0.225);
+    font-size: 140px;
+}
+
+.tungText {
+    margin-bottom: 10px; /* 간격 조절을 위해 추가 */
+}
+
+.emptyState {
+    font-size: 25px;
+    color: white;
+    margin-bottom: 180px;
+}
+
+
+
+
+/* ========================================================================= */
+
+.favoritesContainer {
+    display: flex;
+    justify-content: space-between;
+
+    border: dotted 8px;
+    border-color: rgb(210, 255, 217);
+
+    margin: 0 5% 5% 5%;
+}
+
+.favoriteAlbums,
+.favoriteTracks {
+    width: 700px;
+    text-align: center;
+
+    margin: 2% 3% 2% 3%;
+
+    border: 10px solid rgba(255, 255, 255, 0.148);
+    border-radius: 20px;
+}
+
+.favoriteAlbumsText,
+.favoriteTracksText {
+    color: rgb(81, 199, 122);
+    margin: 5% 2% 0 2%;
+}
+
+.emptyText {
+    color: white;
+    margin-bottom: 100%;
+}
+
+.trackUl {
+    list-style-type: none;
+    text-align: center;
+}
+
+
+.trackLi {
+    list-style-type: none;
+
+    color: white;
+    text-align: center;
+    font-size: 22px;
+
+    margin-bottom: 20px;
+}
+
+.emptySpace {
+    height: 25px;
+}

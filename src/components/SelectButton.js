@@ -24,15 +24,11 @@ function SelectButton() {
                     </div>
                 </div>
 
-                <br /><br />
-
                 <div className='spotifySearchWrapper'>
                     <div className='spotifySearch'>
                         <Link to="/spotify-main" className='spotifySearchLink'>Search Music</Link>
                     </div>
                 </div>
-
-                <br /><br />
 
                 <div className='spotifyKeywordWrapper'>
                     <div className='spotifyKeyword'>
@@ -40,7 +36,11 @@ function SelectButton() {
                     </div>
                 </div>
 
-                <br /><br />
+                <div className='recommendWrapper'>
+                    <div className='recommend'>
+                        <Link to="/spotify-recommend" className='recommendLink'>Recommend</Link>
+                    </div>
+                </div>
 
                 <div className='myPageWrapper'>
                     <div className='myPage'>

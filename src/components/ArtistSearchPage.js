@@ -93,6 +93,10 @@ function ArtistSearchPage() {
                 />
             </div>
 
+            <div className='musicSearch-center'>
+                <h1 className='musicSearch'>Artist Search</h1>
+            </div>
+
             <Container>
                 <InputGroup className='mb-3' size='1g'>
                     <FormControl
@@ -118,7 +122,7 @@ function ArtistSearchPage() {
                 {albumInfo.map((album, i) => (
                     <div key={i} className="albumContainer">
                         <div className="albumInfo-searchPage">
-                            <Link to={`/album-detail/${album.id}`}>
+                            <Link to={`/album-detail/${album.id}`} className='albumLink-artistSearch'>
                                 <div className='albumName'>
                                     {album.name}
                                 </div>
@@ -136,7 +140,6 @@ function ArtistSearchPage() {
                                 ) : (
                                     <img src={emptyHeartImage} alt="Not Liked" />
                                 )}
-                                Favorite
                             </Button>
                         </div>
                     </div>

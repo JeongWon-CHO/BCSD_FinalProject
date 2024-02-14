@@ -33,3 +33,54 @@
     padding-bottom: 1.7px;
     padding-left: 1px;
 }
+
+.emptySpace-music {
+    height: 50px;
+}
+
+.musicList-music {
+    display: flex; /* Flexbox 사용 */
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: space-between; /* 좌우 요소를 페이지 양쪽 끝으로 분산 */
+    
+    color: white;
+    font-size: 20px;
+    margin-bottom: 20px;
+    list-style-type: none; /* 기존 점 없애기 */
+    position: relative; /* 하트 기호를 위한 위치 지정 */
+    padding-left: 30px; /* 텍스트와 하트 사이에 공간 추가 */
+    margin-left: 6%;
+    max-width: 90%; /* 최대 너비 설정 */
+}
+
+.musicList-music span {
+    white-space: nowrap; /* 텍스트를 한 줄에 표시 */
+    overflow: hidden; /* 내용이 넘칠 경우 숨김 처리 */
+    text-overflow: ellipsis; /* 넘치는 텍스트를 말줄임표로 표시 */
+    flex-grow: 1; /* 텍스트 영역이 가능한 많은 공간을 차지하도록 함 */
+    max-width: 75%; /* 텍스트 최대 너비를 더욱 제한 */
+    padding-right: 20px; /* 하트 이미지와의 간격 조정 */
+}
+
+.musicList-music::before {
+    content: '♥';
+    color: pink;
+    position: absolute; /* 절대 위치 사용 */
+    left: 0; /* 왼쪽에 위치 */
+    top: 0; /* 상단에 위치 */
+    font-size: 20px; /* 하트 크기 설정 */
+}
+
+.favorMusic-music {
+    position: absolute; /* 절대 위치 사용 */
+    right: 10%;
+    background-color: rgba(153, 236, 181, 0);
+    border: none;
+    outline: none;
+}
+
+.fillHartImg,
+.emptyHartImg {
+    width: 30px;
+    height: auto;
+}

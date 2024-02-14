@@ -57,13 +57,11 @@
 
 
 
-
 /*SelectButton*/
 
 .dividingLine {
   border-top: 4px solid #444444;
   border-radius: 10px;
-
   margin: 50px auto;
   margin-bottom: 70px;
   width: 700px;
@@ -89,9 +87,14 @@
     color: aliceblue;
     text-decoration-line: none; /* 밑줄 제거 */
     text-align: center;
+
+    margin-bottom: 25px;
   }
   
-  .spotifySearchWrapper {
+  .spotifySearchWrapper,
+  .spotifyKeywordWrapper,
+  .myPageWrapper,
+  .recommendWrapper {
     display: flex; /* Flexbox를 사용하여 내부 요소들을 정렬 */
     justify-content: center; /* 수평 가운데 정렬 */
   }
@@ -108,12 +111,8 @@
     color: aliceblue;
     text-decoration: none; 
     text-align: center;
-  }
-  
-  
-  .spotifyKeywordWrapper {
-    display: flex; /* Flexbox를 사용하여 내부 요소들을 정렬 */
-    justify-content: center; /* 수평 가운데 정렬 */
+
+    margin-bottom: 25px;
   }
   
   .spotifyKeyword {
@@ -128,19 +127,30 @@
     color: aliceblue;
     text-decoration: none; /* 밑줄 제거 */
     text-align: center;
-  
+
+    margin-bottom: 25px;
   }
+
+  .recommend {
+    width: 400px;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
   
+    border: 4px solid rgb(30, 215, 96);
+    border-radius: 30px;
   
-  .myPageWrapper {
-    display: flex; /* Flexbox를 사용하여 내부 요소들을 정렬 */
-    justify-content: center; /* 수평 가운데 정렬 */
+    color: aliceblue;
+    text-decoration: none; 
+    text-align: center;
+
+    margin-bottom: 25px;
   }
   
   .myPage {
     width: 400px;
     
-    padding-top: 20px;
+    padding-top: 18px;
     padding-bottom: 20px;
   
     border: 4px solid rgb(30, 215, 96);
@@ -151,22 +161,22 @@
     text-align: center;
   }
 
-
   .spotifySearchLink, 
   .artistSearchLink, 
   .spotifyKeywordLink, 
-  .myPageLink {
+  .myPageLink,
+  .recommendLink {
     font-size: 30px;
     color: aliceblue;
     text-decoration: none; 
-    
     text-align: center;
   }
 
   .artistSearchLink:hover,
   .spotifySearchLink:hover,
   .spotifyKeywordLink:hover,
-  .myPageLink:hover {
+  .myPageLink:hover,
+  .recommendLink:hover {
       color: rgb(30, 215, 96); /* 호버 했을 때의 색깔 */
   }
 
@@ -193,7 +203,7 @@ body {
 
 
 .extraSpace {
-  height: 115px; /* 여유 공간 */
+  height: 55px; /* 여유 공간 */
 }
 
 .footer {
@@ -273,6 +283,17 @@ body {
 }
 
 
+.albumLink-artistSearch {
+  text-decoration: none;
+  color: white;
+}
+
+.albumLink-artistSearch :hover {
+  color: rgb(20, 169, 73);
+}
+
+
+
 .albumInfo-searchPage {
   align-items: center;
   display: flex;
@@ -281,17 +302,13 @@ body {
 
 
 .likeBtn{
-  margin-top: 10px;
+  margin-top: 16px;
   margin-left: 5%;
 
-  border-radius: 15px;
-
-  background-color: rgb(153, 236, 180);
+  background-color: rgba(153, 236, 181, 0);
+  border: none;
+  outline: none;
 }
-
-
-
-
 
 
 
@@ -422,71 +439,4 @@ body {
   content: '❤. ';
   color: pink;
   padding-right: 10px; /* 하트와 텍스트 사이의 간격 조절 */
-}
-
-
-
-
-/* My Page */
-
-.myFavorAlbums {
-  text-align: center;
-  color: rgb(81, 199, 122);
-  
-  font-size: 70px;
-
-  margin-top: 1%;
-  margin-bottom: 5%;
-}
-
-.myFavor-myPage {
-  
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-bottom: 10%;
-
-  border: dotted 8px;
-  border-color: rgb(210, 255, 217);
-
-}
-
-
-.myFavorMusic-myPage {
-  
-  margin-left: 22%;
-  margin-right: 22%;
-  margin-bottom: 4%;
-  margin-top: 4%;
-
-  border: 10px solid rgba(255, 255, 255, 0.096);
-  border-radius: 20px;
-}
-
-
-.albumName-myPage {
-  text-align: center;
-  color: rgb(81, 199, 122);
-}
-
-
-.albumImgDiv-myPage {
-  display: flex; /* Flexbox를 사용하여 내부 요소들을 정렬 */
-  justify-content: center; /* 수평 가운데 정렬 */
-}
-
-
-.albumImg-myPage {
-  width: 300px;
-  height: auto;
-}
-
-.albumRelease-myPage {
-  text-align: center;
-  color: rgb(204, 204, 204);
-}
-
-.trackList-myPage {
-  color: white;
-  text-align: center;
-  list-style-type: none;
 }

@@ -11,7 +11,6 @@ function SpotifyKeywordPage() {
     const [playlists, setPlaylists] = useState([]);
     const [selectedPlaylist, setSelectedPlaylist] = useState('');
     const [tracks, setTracks] = useState([]);
-    const [selectedTrack, setSelectedTrack] = useState(null);
     const [token, setToken] = useState('');
 
     const navigate = useNavigate();
