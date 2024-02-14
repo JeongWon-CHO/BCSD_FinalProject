@@ -1,88 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import StartingPage from './components/StartingPage';
 import './App.css';
-import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
-
-// 가수 검색 페이지 컴포넌트
-import ArtistSearchPage from './components/ArtistSearchPage';
-
-// 앨범 상세 페이지 컴포넌트
-import AlbumDetailPage from './components/AlbumDetailPage';
-
-// 스포티파이 메인 화면
-import Spotify from './components/Spotify';
-
-import SpotifyKeywordPage from './components/SpotifyKeywordPage';
-
-
-function ArtistSearchButton() {
-  return (
-    <div>
-        <br></br>
-        <div className='mainLoge'>
-          <br></br>
-          <img src='https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png' className='centerImage'/>
-          <br></br><br></br><br></br>
-        </div>
-
-
-        <div className='artistSearchWrapper'>
-          <div className='artistSearch'>
-            <Link to="/artist-search">가수 검색</Link>
-          </div>
-        </div>
-      
-      <br></br>
-      <br></br>
-
-        <div className='spotifySearchWrapper'>
-          <div className='spotifySearch'>
-            <Link to="/spotify-main">스포티파이</Link>
-          </div>
-        </div>
-
-      <br></br>
-      <br></br>
-
-        <div className='spotifyKeywordWrapper'>
-          <div className='spotifyKeyword'>
-            <Link to="/spotify-keyword">키워드 검색</Link>
-          </div>
-        </div>
-
-        <div className="extraSpace"></div>
-
-        <div className='footer'>
-          @2023-2 BCSD FrontEnd Beginner Final Project
-        </div>
-    </div>
-  );
-}
+import './css/MusicSearchPage.css'
 
 function App() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  return (
+  function handleSubmit(e) {
 
-    <Router>
-      <Routes>
-        {/* ArtistSearchPage 컴포넌트와 연결된 라우트 */}
-        <Route path="/artist-search" element={<ArtistSearchPage />} />
+      e.preventDefault();
 
-        {/* AlbumDetailPage 컴포넌트와 연결된 라우트 */}
-        <Route path="/album-detail/:albumId" element={<AlbumDetailPage />} /> {/* AlbumDetailPage 라우트 추가 */}
+      if (username === 'a' && password === '1234') {
+          localStorage.setItem('userName', username);
+          setIsLoggedIn(true);
+      } else {
+          alert('아이디 또는 비밀번호가 올바르지 않습니다.');
+      }
+  }
 
-        {/* 가수 검색 버튼이 있는 페이지도 라우트로 처리 */}
-        <Route path="/" element={<ArtistSearchButton />} />
+  return isLoggedIn ? <StartingPage /> : (
+      <form className="login-form" onSubmit={handleSubmit}>
 
-        {/* Spotify 컴포넌트와 연결된 라우트 */}
-        <Route path="/spotify-main" element={<Spotify />} />
+          <div className='login'>
+            <h1>Login</h1>
+          </div>
 
-        {/* 키워드 검색 컴포넌트와 연결된 라우트 */}
-        <Route path="/spotify-keyword" element={<SpotifyKeywordPage />} />
-      </Routes>
-    </Router>
-    
+          <div className='input-center'>
+            <div className='input-container'>
+                <input
+                  className='idBtn'
+                  type="text"
+                  placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
+              </div>
+          </div>
+            
+            <div className='input-center'>
+              <div className='input-container'>
+                <input
+                className='pwBtn'
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+              </div>
+            </div>
+            
+            <div className='input-center'>
+              <div>
+                <button className='loginBtn' type="submit">Login</button>
+              </div> 
+            </div>
+
+          
+      </form>
   );
 }
-
 
 export default App;

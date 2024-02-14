@@ -1,0 +1,35 @@
+
+.musicSearch-center,
+.inputBtn-center {
+    display: flex; /* Flexbox를 사용하여 내부 요소들을 정렬 */
+    justify-content: center; /* 수평 가운데 정렬 */
+}
+
+.musicSearch {
+    color: rgb(37, 215, 99);
+    font-size: 70px;
+    
+    margin-top: 30px;
+}
+
+.inputBtn-music {
+    width: 560px;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 30px;
+    padding-left: 50px;
+    border: 3px solid rgb(20, 169, 73);
+}
+
+.searchBtn {
+    width: 50px;
+    margin-left: 10px;
+    height: 50px;
+    font-size: 20px;
+    padding: 0px;
+    border-radius: 30px;
+    border: 3px solid rgb(20, 169, 73);
+
+    padding-bottom: 1.7px;
+    padding-left: 1px;
+}

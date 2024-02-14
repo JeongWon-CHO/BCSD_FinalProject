@@ -1,82 +1,135 @@
 import React, { useState, useEffect } from 'react';
-import { Container, InputGroup, FormControl, Button, Row, Card } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
+import spotifyGreenLogo from '../images/Spotify_Logo_RGB_Green.png';
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
 
-function ArtistSearchPage() {
+function SpotifyKeywordPage() {
+    const [genres, setGenres] = useState([]);
+    const [selectedGenre, setSelectedGenre] = useState('');
+    const [playlists, setPlaylists] = useState([]);
+    const [selectedPlaylist, setSelectedPlaylist] = useState('');
+    const [tracks, setTracks] = useState([]);
+    const [selectedTrack, setSelectedTrack] = useState(null);
+    const [token, setToken] = useState('');
 
-    const [searchInput, setSearchInput] = useState("");
-    const [accessToken, setAccessToken] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
-        // API Access Token
-        const authParameters = {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: 'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET
-        }
-        fetch('https://accounts.spotify.com/api/token', authParameters)
-            .then(result => result.json())
-            .then(data => setAccessToken(data.access_token))
+        const getToken = async () => {
+            const result = await fetch('https://accounts.spotify.com/api/token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/x-www-form-urlencoded', 
+                    'Authorization' : 'Basic ' + btoa( CLIENT_ID + ':' + CLIENT_SECRET)
+                },
+                body: 'grant_type=client_credentials'
+            });
+            const data = await result.json();
+            setToken(data.access_token);
+        };
+        getToken();
     }, []);
 
+    useEffect(() => {
+        const getGenres = async () => {
+            const result = await fetch(`https://api.spotify.com/v1/browse/categories?locale=sv_US`, {
+                method: 'GET',
+                headers: { 'Authorization' : 'Bearer ' + token}
+            });
+            const data = await result.json();
+            setGenres(data.categories.items);
+        };
+        if (token) {
+            getGenres();
+        }
+    }, [token]);
 
-
-    // Search
-    // Search 함수가 비동기인 점 : 함수 내부에 다양한 fetch 문이 있고, 차례를 기다려야 하기 때문
-    async function search() {
-        console.log("Search for " + searchInput);
-    
-        const searchParameters = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + accessToken
+    useEffect(() => {
+        const getPlaylistsByGenre = async () => {
+            if (selectedGenre) {
+                const result = await fetch(`https://api.spotify.com/v1/browse/categories/${selectedGenre}/playlists`, {
+                    method: 'GET',
+                    headers: { 'Authorization' : 'Bearer ' + token}
+                });
+                const data = await result.json();
+                setPlaylists(data.playlists.items);
             }
         };
-    
-        try {
-            const searchResponse = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist', searchParameters);
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    }
+        getPlaylistsByGenre();
+    }, [selectedGenre, token]);
+
+    useEffect(() => {
+        const getTracksByPlaylist = async () => {
+            if (selectedPlaylist) {
+                const result = await fetch(selectedPlaylist, {
+                    method: 'GET',
+                    headers: { 'Authorization' : 'Bearer ' + token}
+                });
+                const data = await result.json();
+                setTracks(data.items);
+            }
+        };
+        getTracksByPlaylist();
+    }, [selectedPlaylist, token]);
+
+
+    const handleImageClick = () => {
+        // 이미지를 클릭하여 다른 페이지로 이동
+        navigate('/');
+    };
+
+
+    console.log("Tracks: ", tracks);
 
     return (
+        <div>
 
-    <div>
+            <div className='mainLoge2'>
+                <img src={spotifyGreenLogo} className='centerImageLogo' onClick={handleImageClick} />
+            </div>
 
-        <div className='mainLoge2'>
-            <img src='https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png' className='centerImageLogo'/>
+
+            <div className='keywordPageTitle'>
+                <h1>Spotify Keyword Page</h1>
+            </div>
+            
+            <br></br>
+
+            <div className='selectDiv'>
+                <span className='selectedGenreSpan'>
+                    {/* 장르 선택 */}
+                    <select className='selectedGenre' value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)}>
+                        <option value="">Select Genre</option>
+                        {genres.map(genre => (
+                            <option key={genre.id} value={genre.id}>{genre.name}</option>
+                        ))}
+                    </select>
+                </span>
+
+                <span className='selectedPlaylistSpan'>
+                    {/* 플레이리스트 선택 */}
+                    <select className='selectedPlaylist' value={selectedPlaylist} onChange={(e) => setSelectedPlaylist(e.target.value)}>
+                        <option value="">Select Playlist</option>
+                        {playlists.map(playlist => (
+                            <option key={playlist.id} value={playlist.tracks.href}>{playlist.name}</option>
+                        ))}
+                    </select>
+                </span>
+            </div>
+            
+            
+            <br></br>
+
+            {/* 트랙 목록 */}
+            <ul className='trackList'>
+                {tracks.map(t => (
+                    <li key={t.id}>{t.track.name}</li>
+                ))}
+            </ul>
         </div>
-
-        <Container>
-            <InputGroup className='mb-3' size='1g'>
-                <FormControl
-                className="searchInput"
-                placeholder="Search For KeyWord"
-                type="input"
-                onKeyPress={event => {
-                    if (event.key === "Enter") {
-                    search();
-                    }
-                }}
-
-                onChange={event => setSearchInput(event.target.value)}
-                />
-
-                <Button onClick={search} className="searchInputBtn">
-                    🔍︎
-                </Button>
-            </InputGroup>
-        </Container>
-
-    </div>
     );
 }
 
-export default ArtistSearchPage;
+export default SpotifyKeywordPage;
