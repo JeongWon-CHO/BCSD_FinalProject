@@ -1,8 +1,10 @@
 import { create } from 'zustand';
 
 const useStore = create((set) => ({
+
   favoriteAlbums: [],
-  favoriteTracks: [], // 트랙 즐겨찾기 목록을 위한 새 상태
+  favoriteTracks: [],
+
   addFavoriteAlbum: (album) =>
     set((state) => {
       const isAlbumExist = state.favoriteAlbums.some((favAlbum) => favAlbum.id === album.id);
@@ -13,7 +15,7 @@ const useStore = create((set) => ({
     }),
   removeFavoriteAlbum: (albumId) =>
     set((state) => ({ favoriteAlbums: state.favoriteAlbums.filter((album) => album.id !== albumId) })),
-  addFavoriteTrack: (track) => // 트랙 즐겨찾기 추가 액션
+  addFavoriteTrack: (track) =>
     set((state) => {
       const isTrackExist = state.favoriteTracks.some((favTrack) => favTrack.id === track.id);
       if (!isTrackExist) {
@@ -21,7 +23,7 @@ const useStore = create((set) => ({
       }
       return state;
     }),
-  removeFavoriteTrack: (trackId) => // 트랙 즐겨찾기 제거 액션
+  removeFavoriteTrack: (trackId) =>
     set((state) => ({ favoriteTracks: state.favoriteTracks.filter((track) => track.id !== trackId) })),
 }));
 

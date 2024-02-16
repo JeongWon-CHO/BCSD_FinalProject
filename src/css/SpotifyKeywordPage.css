@@ -1,0 +1,72 @@
+
+.keywordPageTitle {
+    text-align: center;
+    color: rgb(30, 215, 96);
+  
+    font-size: 30px;
+  }
+  
+  .selectDiv {
+    text-align: center;
+  }
+  
+  
+  
+  .selectedGenre {
+    -webkit-appearance: none;  /* 크롬 화살표 없애기 */
+    -moz-appearance: none; /* 파이어폭스 화살표 없애기 */
+    appearance:none;
+  
+    background: url(../images/arrow_down_icon.png) no-repeat 95% 50%;
+  
+    text-align: center;
+  
+    width: 200px;
+    height: 40px;
+  
+    margin-left: 5%;
+    margin-bottom: 2%;
+  
+    border-radius: 15px;
+  
+    background-color: rgb(183, 255, 208);
+  }
+  
+  
+  
+  .selectedPlaylist {
+    -webkit-appearance: none;  /* 크롬 화살표 없애기 */
+    -moz-appearance: none; /* 파이어폭스 화살표 없애기 */
+    appearance:none;
+  
+    background: url(../images/arrow_down_icon.png) no-repeat 95% 50%;
+  
+    text-align: center;
+  
+    width: 700px;
+    height: 40px;
+  
+    margin-left: 5%;
+  
+    border-radius: 15px;
+    background-color: rgb(183, 255, 208);
+  }
+  
+  
+  
+  .trackList {
+    color: white;
+    margin-left: 21.1%;
+    line-height: 40px;
+  }
+  
+  .trackList li {
+    list-style-type: none; /* 기존 점 없애기 */
+  }
+  
+  .trackList li::before {
+    content: '❤. ';
+    color: pink;
+    padding-right: 10px; /* 하트와 텍스트 사이의 간격 조절 */
+  }
+  

@@ -1,0 +1,136 @@
+.dividingLine {
+    border-top: 4px solid #484848;
+    border-radius: 10px;
+    margin: 50px auto;
+    margin-bottom: 70px;
+    width: 1200px;
+}
+
+
+#link-group {
+
+    .artistSearchWrapper {
+      display: flex; /* Flexbox를 사용하여 내부 요소들을 정렬 */
+      justify-content: center; /* 수평 가운데 정렬 */
+    }
+    
+    .artistSearch {
+
+        width: 500px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        border: 4px solid rgb(46, 46, 46);
+        background-color: rgb(46, 46, 46);
+        border-radius: 30px;
+        color: aliceblue;
+        text-decoration-line: none;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    
+    .spotifySearchWrapper,
+    .spotifyKeywordWrapper,
+    .myPageWrapper,
+    .recommendWrapper {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .spotifySearch {
+        width: 500px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        border: 4px solid rgb(46, 46, 46);
+        background-color: rgb(46, 46, 46);
+        border-radius: 30px;
+        color: aliceblue;
+        text-decoration: none; 
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    
+    .spotifyKeyword {
+        width: 500px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        border: 4px solid rgb(46, 46, 46);
+        background-color: rgb(46, 46, 46);
+        border-radius: 30px;
+        color: aliceblue;
+        text-decoration: none;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .recommend {
+        width: 500px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        border: 4px solid rgb(46, 46, 46);
+        background-color: rgb(46, 46, 46);
+        border-radius: 30px;
+        color: aliceblue;
+        text-decoration: none; 
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    
+    .myPage {
+        width: 500px;
+        padding-top: 18px;
+        padding-bottom: 20px;
+        border: 4px solid rgb(46, 46, 46);
+        background-color: rgb(46, 46, 46);
+        border-radius: 30px;
+        color: aliceblue;
+        text-decoration-line: none;
+        text-align: center;
+    }
+
+    .spotifySearchLink, 
+    .artistSearchLink, 
+    .spotifyKeywordLink, 
+    .myPageLink,
+    .recommendLink {
+        font-size: 30px;
+        color: aliceblue;
+        text-decoration: none; 
+        text-align: center;
+    }
+
+    .artistSearchLink:hover,
+    .spotifySearchLink:hover,
+    .spotifyKeywordLink:hover,
+    .myPageLink:hover,
+    .recommendLink:hover {
+        color: rgb(30, 215, 96);
+    }
+
+}
+
+.mainLogo {
+    display: flex;
+    justify-content: center;
+}
+
+.centerImage {
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+    height: auto;
+}
+
+.extraSpace {
+    height: 40px; /* 여유 공간 */
+}
+
+.footer {
+    color: rgba(225, 225, 225, 0.495);
+    text-align: center;
+    padding: 10px 0;
+    font-size: 12px;
+}
+
+body {
+    background-color: rgb(51, 51, 51);
+}

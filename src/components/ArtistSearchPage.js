@@ -6,20 +6,21 @@ import { useNavigate } from 'react-router-dom';
 import emptyHeartImage from '../images/emptyHartImg.png';
 import fillHeartImage from '../images/FillHartImg.png';
 import spotifyGreenLogo from '../images/Spotify_Logo_RGB_Green.png';
-import useStore from './useStore'; // Zustand 스토어 임포트
+import useStore from './useStore';
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
 
 function ArtistSearchPage() {
+    
     const [searchInput, setSearchInput] = useState("");
     const [accessToken, setAccessToken] = useState("");
     const [albumInfo, setAlbumInfo] = useState([]);
     const navigate = useNavigate();
-    const favoriteAlbums = useStore(state => state.favoriteAlbums); // 즐겨찾기 앨범 목록 상태 가져오기
-    const addFavoriteAlbum = useStore(state => state.addFavoriteAlbum); // 즐겨찾기 앨범 추가 액션 가져오기
-    const removeFavoriteAlbum = useStore(state => state.removeFavoriteAlbum); // 즐겨찾기 앨범 제거 액션 가져오기
-
+    const favoriteAlbums = useStore(state => state.favoriteAlbums); // 즐겨찾기 앨범 목록
+    const addFavoriteAlbum = useStore(state => state.addFavoriteAlbum); // 즐겨찾기 앨범 추가
+    const removeFavoriteAlbum = useStore(state => state.removeFavoriteAlbum); // 즐겨찾기 앨범 제거
+    
     useEffect(() => {
         const authParameters = {
             method: 'POST',
@@ -65,7 +66,7 @@ function ArtistSearchPage() {
                         imageURL: albumImageURL,
                         releaseDate: albumReleaseDate,
                         tracks: albumTracks,
-                        favorite: false // 기본값으로 favorite을 false로 설정
+                        favorite: false
                     });
                 }
             }
@@ -79,8 +80,14 @@ function ArtistSearchPage() {
         console.log(albumInfo);
     }, [albumInfo]);
 
+
     const handleImageClick = () => {
         navigate('/');
+    };
+
+    const handleAlbumClick = (album) => {
+        localStorage.setItem(`albumInfo_${album.id}`, JSON.stringify(album));
+        navigate(`/album-detail/${album.id}`);
     };
 
     return (
@@ -90,6 +97,7 @@ function ArtistSearchPage() {
                     src={spotifyGreenLogo}
                     className='centerImageLogo'
                     onClick={handleImageClick}
+                    alt='logo'
                 />
             </div>
 
@@ -116,17 +124,20 @@ function ArtistSearchPage() {
                 </InputGroup>
             </Container>
 
-            <br /><br />
+            <div className='emptySpace-search'>
+                
+            </div>
 
-            <Container>
+            <Container className="albumsGrid">
                 {albumInfo.map((album, i) => (
                     <div key={i} className="albumContainer">
                         <div className="albumInfo-searchPage">
-                            <Link to={`/album-detail/${album.id}`} className='albumLink-artistSearch'>
-                                <div className='albumName'>
-                                    {album.name}
-                                </div>
-                            </Link>
+                        <Link to={`/album-detail/${album.id}`} className='albumLink-artistSearch' onClick={() => handleAlbumClick(album)}>
+                            <div className='albumImgContain-SearchPage'>
+                                <img src={album.imageURL} alt='img' className='albumImg-SearchPage'></img>
+                            </div>
+                        </Link>
+                            <p className='albumName-renew'>{album.name}</p>
                             <Button className='likeBtn' onClick={() => {
                                 const isFavorite = favoriteAlbums.some((favAlbum) => favAlbum.id === album.id);
                                 if (isFavorite) {

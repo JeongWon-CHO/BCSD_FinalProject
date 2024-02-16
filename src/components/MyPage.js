@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import spotifyGreenLogo from '../images/Spotify_Logo_RGB_Green.png';
 import useStore from './useStore'; // Zustand 스토어 임포트
 
 function MyPage() {
@@ -19,9 +20,10 @@ function MyPage() {
 
             <div className='mainLoge2'>
                 <img
-                    src='https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png'
+                    src={spotifyGreenLogo}
                     className='centerImageLogo'
                     onClick={handleImageClick}
+                    alt='Logo'
                 />
             </div>
 

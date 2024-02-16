@@ -1,6 +1,7 @@
-# Getting Started with Create React App
+# 회고 프로젝트 주제: 음악 사이트 구현
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+이 프로젝트는 
 
 ## Available Scripts
 

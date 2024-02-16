@@ -32,7 +32,7 @@ function SelectButton() {
 
                 <div className='spotifyKeywordWrapper'>
                     <div className='spotifyKeyword'>
-                        <Link to="/spotify-keyword" className='spotifyKeywordLink'>Search keyword</Link>
+                        <Link to="/spotify-keyword" className='spotifyKeywordLink'>Genre Search</Link>
                     </div>
                 </div>
 

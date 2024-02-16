@@ -91,7 +91,7 @@ function SpotifyKeywordPage() {
 
 
             <div className='keywordPageTitle'>
-                <h1>Spotify Keyword Page</h1>
+                <h1>Genre-based Search</h1>
             </div>
             
             <br></br>

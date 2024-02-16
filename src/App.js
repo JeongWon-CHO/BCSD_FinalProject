@@ -5,6 +5,10 @@ import './App.css';
 import './css/MusicSearchPage.css'
 import './css/MyPage.css'
 import './css/RecommendPage.css'
+import './css/SpotifyKeywordPage.css'
+import './css/AlbumDetailPage.css'
+import './css/ArtistSearchPage.css'
+import'./css/SelectButton.css'
 
 function App() {
   const [username, setUsername] = useState('');

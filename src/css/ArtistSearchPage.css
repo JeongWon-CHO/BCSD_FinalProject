@@ -1,0 +1,110 @@
+.mb-3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3%;
+}
+
+.searchInput {
+    width: 560px;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 30px;
+    padding-left: 50px;
+    border: 3px solid rgb(20, 169, 73);
+}
+
+.searchInputBtn {
+    width: 50px;
+    margin-left: 10px;
+    height: 50px;
+    font-size: 20px;
+    padding: 0px;
+    border-radius: 30px;
+}
+
+.centerImageLogo {
+    padding-left: 10px;
+    padding-top: 10px;
+    width: 120px;
+    height: auto;
+}
+
+.albumName {
+    width: 500px;
+    margin-top: 5%;
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: white;
+    text-decoration-line: none;
+    border: 3px solid rgb(20, 169, 73);
+    border-radius: 30px;
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 17.5%;
+    box-shadow: 2px 2px 8px rgba(184, 255, 187, 0.3);
+}
+
+.albumName-renew {
+    color: white;
+    margin-bottom: 0;
+}
+
+.albumsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4열 그리드 생성 */
+    gap: 20px; /* 그리드 아이템 사이 간격 */
+    padding: 20px; /* 컨테이너 내부 여백 */
+}
+
+.albumImgContain-SearchPage {
+    width: 270px;
+    height: 270px;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 세로 방향 가운데 정렬 */
+    overflow: hidden; /* 컨테이너를 벗어나는 이미지 부분을 숨김 */
+    border: 10px solid rgb(70, 70, 70);
+    border-radius: 20px;
+}
+
+.albumImg-SearchPage {
+    width: 100%; /* 이미지 너비를 컨테이너에 맞춤 */
+    height: auto;
+}
+
+.albumLink-artistSearch {
+    text-decoration: none;
+    color: white;
+}
+
+.albumLink-artistSearch :hover {
+    color: rgb(20, 169, 73);
+}
+
+.albumInfo-searchPage {
+    display: flex;
+    flex-direction: column; /* 방향을 세로로 변경 */
+    align-items: center; /* 센터 정렬 유지 */
+    justify-content: center; /* 세로 중앙 정렬 */
+}
+
+.likeBtn{
+    margin-top: 10px; /* 이미지와 버튼 사이의 간격 조정 */
+    margin-bottom: 40px;
+    background-color: rgba(153, 236, 181, 0);
+    border: none;
+    outline: none;
+}
+
+.albumContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.emptySpace-search {
+    height: 80px;
+}

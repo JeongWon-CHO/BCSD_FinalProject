@@ -14,6 +14,11 @@ function RecommendPage() {
     const moods = [
         { label: '신남', value: 'happy' },
         { label: '차분함', value: 'calm' },
+        { label: '즐거운', value: 'enjoy' },
+        { label: '우울한', value: 'sad' },
+        { label: '화난', value: 'angry' },
+        { label: '놀란', value: 'amazed' },
+        { label: '발랄한', value: 'cheer' },
     ];
 
     useEffect(() => {
@@ -33,7 +38,6 @@ function RecommendPage() {
 
         getToken();
     }, []);
-    
 
     const handleMoodChange = async (e) => {
         const mood = e.target.value;
@@ -49,6 +53,21 @@ function RecommendPage() {
                 break;
             case 'calm':
                 searchQuery = 'calm';
+                break;
+            case 'enjoy':
+                searchQuery = 'enjoy';
+                break;
+            case 'sad':
+                searchQuery = 'sad';
+                break;
+            case 'angry':
+                searchQuery = 'angry';
+                break;
+            case 'amazed':
+                searchQuery = 'amazed';
+                break;
+            case 'cheer':
+                searchQuery = 'cheer';
                 break;
             default:
                 searchQuery = '';
@@ -78,6 +97,7 @@ function RecommendPage() {
                     src='https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png'
                     className='centerImageLogo'
                     onClick={handleImageClick}
+                    alt='Logo'
                 />
             </div>
 
@@ -92,14 +112,16 @@ function RecommendPage() {
                 ))}
                 </select>
             </div>
-            미완성페이지...
-            <div className='trackList-board-recommend'>
-                <ul className='trackList-recommend-ul'>
-                    {tracks.map(track => (
-                        <li className='trackList-recommend-li' key={track.id}>{track.name} - {track.artists.map(artist => artist.name).join(', ')}</li>
-                    ))}
-                </ul>
-            </div>
+            
+            {selectedMood && (
+                <div className='trackList-board-recommend'>
+                    <ul className='trackList-recommend-ul'>
+                        {tracks.map(track => (
+                            <li className='trackList-recommend-li' key={track.id}>{track.name} - {track.artists.map(artist => artist.name).join(', ')}</li>
+                        ))}
+                    </ul>
+                </div>
+            )}
             
         </div>
     );

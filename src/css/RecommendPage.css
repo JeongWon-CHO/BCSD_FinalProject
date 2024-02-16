@@ -1,7 +1,6 @@
 .musicRecommendTitle {
     text-align: center;
     color: rgb(30, 215, 96);
-
     font-size: 50px;
 }
 
@@ -11,20 +10,18 @@
 
 .selectMood {
     margin-top: 2%;
-
     width: 400px;
     height: 60px;
-
     text-align: center;
     font-size: 20px;
-
-    color: rgb(83, 83, 83);
-
+    color: rgb(185, 185, 185);
     border-radius: 18px;
+    border-color: rgb(44, 44, 44);
+    background-color: rgb(44, 44, 44);
 }
 
 .trackList-board-recommend {
-    margin: 2% 5% 5% 5%;
+    margin: 5% 5% 3% 5%;
     border: 8px solid rgba(255, 255, 255, 0.112);
     border-radius: 20px;
 }
@@ -32,13 +29,10 @@
 .trackList-recommend-ul {
     color: white;
     font-size: 20px;
-    
-    list-style-type: none; /* 기존 점 없애기 */
+    list-style-type: none;
     position: relative; /* 하트 기호를 위한 위치 지정 */
     padding-left: 30px; /* 텍스트와 하트 사이에 공간 추가 */
-    margin-left: 6%;
     max-width: 90%; /* 최대 너비 설정 */
-
     margin-top: 4%;
     margin-bottom: 4%;
 }
@@ -47,4 +41,13 @@
 .trackList-recommend-li {
     margin-bottom: 20px;
     margin-left: 10%;
+    overflow: hidden; /* 내용이 넘치면 숨김 처리 */
+    text-overflow: ellipsis; /* 넘친 텍스트를 ...로 대체 */
+    width: 90%; /* 적절한 너비 설정 */
+}
+
+.trackList-recommend-li::before {
+    content: '\2764'; /* 하트 유니코드 */
+    color: pink;
+    margin-right: 10px; /* 하트와 텍스트 사이의 간격 */
 }
