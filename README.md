@@ -1,71 +1,58 @@
 # 회고 프로젝트 주제: 음악 사이트 구현
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-이 프로젝트는 
 
-## Available Scripts
 
-In the project directory, you can run:
+노래 검색 / 가수 검색 / 장르별 검색 / 즐겨찾기
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 페이지별 기능
 
-### `npm run build`
+다음은 페이지별 기능을 소개한다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 1. 첫 시작 화면 (Login 페이지)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Spotify는 로그인을 해야지만 서비스 이용한 점을 참고하여,
+로그인 페이지를 만들었다.
+해당 페이지는 단순히 로그인 기능을 간접적으로 모방한 페이지다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 2. 페이지 선택 화면
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+원하는 기능이 들어간 페이지를 고를 수 있다.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Artist Search / Music Search / Search keyword / Recommend / My Page
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 3. 아티스트 검색 페이지
 
-### Code Splitting
+아티스트 이름을 검색하면, 해당 아티스트가 발매한 앨범 커버가 제공된다.
+흔히들 "명반"이라고 불리는 앨범들이 많기에, 명반을 따로 관리할 수 있게 하트 이모지를 누르면 즐겨찾기를 할 수 있게 했다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 4. 앨범 상세 페이지
 
-### Analyzing the Bundle Size
+아티스트 검색 페이지에서 나온 앨범을 누르면, 해당 앨범의 상세 정보가 들어있는 페이지로 넘어간다.
+앨범 발매일, 아티스트의 팔로워 수, 앨범에 수록된 곡에 대한 정보가 나열된다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 5. 노래 검색 페이지
 
-### Making a Progressive Web App
+노래 검색 페이지다. 이 또한, 좋아하는 노래는 즐겨찾기를 할 수 있다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 6. 장르 기반 검색 페이지
 
-### Advanced Configuration
+Spotify api에서 제공하는 장르를 고르고, 세부 장르까지 고르면, 이에 해당되는 음악들이 나온다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 7. 추천 페이지
 
-### Deployment
+감정과 관련된 단어를 고르면, 해당 단어에 맞는 노래 추천 목록이 나온다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### 8. My Page
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+내가 즐겨찾기 한 앨범과 노래가 보여진다.
+좌측에는 노래 목록, 우측에는 앨범 목록이 보여진다.
